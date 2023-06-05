@@ -67,7 +67,7 @@ package main
 
 import (
 	"fmt"
-	"gitee.com/lyrLearning/zinx_v1.0/znet"
+	"github.com/linyerun/zinx/znet"
 	"net"
 )
 
