@@ -5,6 +5,7 @@ import (
 	. "github.com/linyerun/zinx/global_properties"
 	"github.com/linyerun/zinx/ziface"
 	"math/rand"
+	"time"
 )
 
 // ReqProcessingCenter 消息处理模块的实现
@@ -49,6 +50,7 @@ func (m *ReqProcessingCenter) ExecReqAppointedHandler(req ziface.IRequest) {
 
 func (m *ReqProcessingCenter) SendReqToWorkers(req ziface.IRequest) {
 	//随机分配给一个任务协程处理
+	rand.Seed(time.Now().Unix())
 	workerID := rand.Uint32() % m.WorkPoolSize
 	fmt.Println("add ConnID =", req.GetConnection().GetConnID(), "to WorkerID =", workerID, "to execute")
 	//发送到对于的worker去处理
