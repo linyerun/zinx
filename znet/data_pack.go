@@ -5,7 +5,7 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
-	. "github.com/linyerun/zinx/global_properties"
+	. "github.com/linyerun/zinx/gproperties"
 	"github.com/linyerun/zinx/ziface"
 	"io"
 	"net"

@@ -2,7 +2,7 @@ package znet
 
 import (
 	"fmt"
-	. "github.com/linyerun/zinx/global_properties"
+	. "github.com/linyerun/zinx/gproperties"
 	"github.com/linyerun/zinx/ziface"
 	"math/rand"
 	"time"

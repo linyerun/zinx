@@ -1,4 +1,4 @@
-package global_properties
+package gproperties
 
 import (
 	"encoding/json"

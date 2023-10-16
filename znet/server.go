@@ -2,7 +2,7 @@ package znet
 
 import (
 	"fmt"
-	"github.com/linyerun/zinx/global_properties"
+	"github.com/linyerun/zinx/gproperties"
 	"github.com/linyerun/zinx/ziface"
 	"net"
 )
@@ -21,14 +21,14 @@ type Server struct {
 
 func NewServer() (server ziface.IServer) {
 	// 初始化全局变量
-	global_properties.Init()
+	gproperties.Init()
 
 	// 使用全局变量
 	server = &Server{
-		Name:                global_properties.GlobalObject.Name,
+		Name:                gproperties.GlobalObject.Name,
 		IPVersion:           "tcp4",
-		IP:                  global_properties.GlobalObject.Host,
-		Port:                global_properties.GlobalObject.TcpPort,
+		IP:                  gproperties.GlobalObject.Host,
+		Port:                gproperties.GlobalObject.TcpPort,
 		ReqProcessingCenter: newReqProcessingCenter(),
 		ConnsMgr:            newConnsManager(),
 	}
@@ -76,8 +76,8 @@ func (s *Server) callOnConnStop(connection ziface.IConnection) {
 }
 
 func (s *Server) start() {
-	fmt.Printf("[Zinx] Server Name: %s, Listening at IP: %s, Port: %d is starting!\n", global_properties.GlobalObject.Name, global_properties.GlobalObject.Host, global_properties.GlobalObject.TcpPort)
-	fmt.Printf("[Zinx] Version %s, MaxConn: %d, MaxPacketSize: %d\n", global_properties.GlobalObject.Version, global_properties.GlobalObject.MaxConn, global_properties.GlobalObject.MaxPacketSize)
+	fmt.Printf("[Zinx] Server Name: %s, Listening at IP: %s, Port: %d is starting!\n", gproperties.GlobalObject.Name, gproperties.GlobalObject.Host, gproperties.GlobalObject.TcpPort)
+	fmt.Printf("[Zinx] Version %s, MaxConn: %d, MaxPacketSize: %d\n", gproperties.GlobalObject.Version, gproperties.GlobalObject.MaxConn, gproperties.GlobalObject.MaxPacketSize)
 	fmt.Printf("[start] Server Listener at IP: %s, Port: %d, is starting\n", s.IP, s.Port)
 
 	//开启工作池
@@ -108,12 +108,12 @@ func (s *Server) start() {
 		}
 
 		//超出最大连接数之后就拒绝连接
-		if s.ConnsMgr.Len() == global_properties.GlobalObject.MaxConn {
+		if s.ConnsMgr.Len() == gproperties.GlobalObject.MaxConn {
 			if err := conn.Close(); err != nil { // 关闭连接
 				fmt.Println("关闭连接失败, err:", err)
 				continue
 			}
-			fmt.Println("to many connections,over MaxConnections which is equal", global_properties.GlobalObject.MaxConn)
+			fmt.Println("to many connections,over MaxConnections which is equal", gproperties.GlobalObject.MaxConn)
 			continue
 		}
 

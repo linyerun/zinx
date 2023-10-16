@@ -3,7 +3,7 @@ package znet
 import (
 	"errors"
 	"fmt"
-	"github.com/linyerun/zinx/global_properties"
+	"github.com/linyerun/zinx/gproperties"
 	"net"
 	"sync"
 )
@@ -24,7 +24,7 @@ func newConnection(server *Server, conn *net.TCPConn, connID uint32) *Connection
 		server:     server,
 		Conn:       conn,
 		ConnID:     connID,
-		msgChan:    make(chan []byte, global_properties.GlobalObject.MaxMsgChanSize),
+		msgChan:    make(chan []byte, gproperties.GlobalObject.MaxMsgChanSize),
 		exitChan:   make(chan struct{}),
 		properties: map[string]interface{}{},
 	}
